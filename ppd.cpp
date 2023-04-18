@@ -79,7 +79,7 @@ int main(int argc, char **argv)
 }
 
 std::string mainMenu(){
-    std::cout << "Main Menu:"<< std::endl;
+    std::cout << "Main Men:"<< std::endl;
     std::cout << "    1.Display Items"<< std::endl;
     std::cout << "    2.Purhcase Items"<< std::endl;
     std::cout << "    3.Save and Exit"<< std::endl;
