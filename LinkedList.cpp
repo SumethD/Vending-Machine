@@ -104,3 +104,42 @@ void LinkedList::sortByName()
     }
 }
 
+void LinkedList::remove(const std::string id) {
+
+     if (head == nullptr) {
+        std::cout << "List is empty." << std::endl;
+        return;
+    }
+
+    // Check if the node to be removed is the head node
+    if (head->data->id == id) {
+        Node* temp = head;
+        head = head->next;
+        std::cout <<'"'<< id << " - " << temp->data->name << " - " << temp->data->description << '"'<< " has been removed from the system." << std::endl;
+        delete temp;
+        return;
+    }
+
+    // Traverse the list to find the node to be removed
+    Node* curr = head;
+    Node* prev = nullptr;
+    while (curr != nullptr && curr->data->id != id) {
+        prev = curr;
+        curr = curr->next;
+    }
+
+    // If the node is not found in the list
+    if (curr == nullptr) {
+        std::cout << "Node with ID " << id << " not found." << std::endl;
+        return;
+    }
+
+    // Remove the node
+    prev->next = curr->next;
+    std::cout <<'"'<< id << " - " << curr->data->name << " - " << curr->data->description << '"'<< " has been removed from the system." << std::endl;
+    delete curr;
+}
+
+
+
+

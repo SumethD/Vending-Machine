@@ -51,7 +51,9 @@ int main(int argc, char **argv)
             choice = mainMenu();
         }
         else if (choice == "5") {
-            std::cout<<"choice 5"<<std::endl;
+            std::cout<<"Enter the item id of the item to remove from the menu: "<< std::endl;
+            std::string id_name = readInput();
+            itemstock.remove(id_name);
             choice = mainMenu();
         }
         else if (choice == "6") {

@@ -13,9 +13,9 @@ public:
     // more functions to be added perhaps...
     void loadData(const std::string& filename);
     void sortByName();
+    void remove(std::string id);
 private:
     // the beginning of the list
-  
     // how many nodes are there in the list?
     unsigned count;
 };
