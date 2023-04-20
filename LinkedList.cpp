@@ -150,6 +150,7 @@ void LinkedList::remove(const std::string id) {
     delete curr;
 }
 
+// Find out the nextId of the list
 std::string LinkedList::nextID() {
     if (head == nullptr) {
         return "I0001";
