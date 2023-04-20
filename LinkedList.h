@@ -14,6 +14,8 @@ public:
     void loadData(const std::string& filename);
     void sortByName();
     void remove(std::string id);
+    std::string nextID();
+    std::string addNewNode(const std::string& newId);
 private:
     // the beginning of the list
     // how many nodes are there in the list?
