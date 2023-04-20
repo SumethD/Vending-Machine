@@ -47,7 +47,9 @@ int main(int argc, char **argv)
             choice = mainMenu();
         }
         else if (choice == "4") {
-            std::cout<<"choice 4"<<std::endl;
+            std::string newId = itemstock.nextID();
+            std::cout<<"The id of the new stock will be: "<< newId << std::endl;
+            choice = itemstock.addNewNode(newId);
             choice = mainMenu();
         }
         else if (choice == "5") {

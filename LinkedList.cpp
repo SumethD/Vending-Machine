@@ -52,10 +52,20 @@ void LinkedList::loadData(const std::string& filename) {
 
         double value =std::stod(fields[3]) ;
         int dollars = std::floor(value); // get integer part
-        int cents = (value - dollars) * 100; // get decimal part as cents
+        int cents = std::round(((value - dollars) * 100));
+
+        if (cents == 0){
+            std::stringstream ss;
+            ss << std::setw(2) << std::setfill('0') << cents;
+            newNode->data->price.cents =ss.str();
+        }
+        else{
+            newNode->data->price.cents =std::to_string(cents);  
+        }
+
 
         newNode->data->price.dollars = dollars;
-        newNode->data->price.cents =cents;
+        
 
 
 
@@ -139,6 +149,96 @@ void LinkedList::remove(const std::string id) {
     std::cout <<'"'<< id << " - " << curr->data->name << " - " << curr->data->description << '"'<< " has been removed from the system." << std::endl;
     delete curr;
 }
+
+std::string LinkedList::nextID() {
+    if (head == nullptr) {
+        return "I0001";
+    }
+
+    Node* current = head;
+    std::string lastId = current->data->id;
+    while (current->next != nullptr) {
+        current = current->next;
+        std::string currentId = current->data->id;
+        if (currentId > lastId) {
+            lastId = currentId;
+        }
+    }
+
+    int idNum = std::stoi(lastId.substr(1)) + 1;
+    std::string newId = "I000" + std::to_string(idNum);
+    return newId;
+}
+
+
+std::string LinkedList::addNewNode(const std::string& newId) {
+    // Prompt the user for input
+    std::string name, description;
+    double price;
+    std::cout << "Enter the Item name: ";
+    std::getline(std::cin, name);
+    std::cout << "Enter the item description: ";
+    std::getline(std::cin, description);
+    std::cout << "Enter the price for the item: ";
+    std::cin >> price;
+
+    // Create a new Node and populate it with the provided data
+    Node* newNode = new Node();
+    newNode->data->id = newId;
+    newNode->data->name = name;
+    newNode->data->description = description;
+    newNode->data->on_hand = 20;
+
+
+
+    int dollars = std::floor(price); // get integer part of the price
+    int cents = ((price - dollars) * 100);
+
+    double frac_part = std::abs(price - std::trunc(price));
+    std::cout << frac_part;
+    while (!(frac_part == 0.0 || std::abs(frac_part - 0.05) < 1e-9 || std::abs(frac_part - 0.5) < 1e-9 )){
+        std::cout << "Error: the cents need to be a multiple of 5."; 
+        std::cout << "Enter the price for the item: ";
+        std::cin >> price;
+        dollars = std::floor(price); // get integer part of the price
+        cents = ((price - dollars) * 100);
+        frac_part = std::abs(price - std::trunc(price));
+    }
+
+    // ((frac_part *100)%5 == 0.0 &&  (frac_part == 0.1 || frac_part == 0.2 || frac_part == 0.3 || frac_part == 0.4 || frac_part == 0.6 || frac_part == 0.7  || frac_part == 0.8|| frac_part == 0.9))
+
+    if (cents == 0){
+            std::stringstream ss;
+            ss << std::setw(2) << std::setfill('0') << cents;
+            newNode->data->price.cents =ss.str();
+        }
+        else{
+            newNode->data->price.cents =std::to_string(cents);  
+        }
+
+
+    newNode->data->price.dollars = dollars;
+
+    // Add the new Node to the end of the list
+    if (head == nullptr) {
+        head = newNode;
+    } 
+    else {
+        Node* current = head;
+        while (current->next != nullptr) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+    count++;
+
+    std::cout<< "This item " <<'"'<< name << "-"<< description <<'"' <<" has now been added to the menu."<< std::endl;
+    std::string input;
+    std::getline(std::cin, input);
+    return input;
+}
+
+
 
 
 
