@@ -87,8 +87,7 @@ void LinkedList::loadData(const std::string& filename) {
     file.close();
 }
 
-void LinkedList::sortByName()
-{
+void LinkedList::sortByName() {
     Node* current = head;
 
     while (current != nullptr)
@@ -98,8 +97,7 @@ void LinkedList::sortByName()
 
         while (searchNode != nullptr)
         {
-            if (searchNode->data->name < minNode->data->name)
-            {
+            if (searchNode->data->name < minNode->data->name) {
                 minNode = searchNode;
             }
             searchNode = searchNode->next;
@@ -240,6 +238,15 @@ std::string LinkedList::addNewNode(const std::string& newId) {
 }
 
 
+void LinkedList::resetStock() {
+    Node* current = head;
+    while (current != nullptr) {
+        current->data->on_hand = 20;
+        current = current->next;
+    }
+    std::cout << "All stock has been reset to the default level of " << 20 << std::endl;
+
+}
 
 
 

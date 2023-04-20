@@ -63,7 +63,7 @@ int main(int argc, char **argv)
             choice = mainMenu();
         }
         else if (choice == "7") {
-            std::cout<<"choice 7"<<std::endl;
+            itemstock.resetStock();
             choice = mainMenu();
         }
         else if (choice == "8") {

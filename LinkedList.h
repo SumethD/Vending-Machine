@@ -16,6 +16,7 @@ public:
     void remove(std::string id);
     std::string nextID();
     std::string addNewNode(const std::string& newId);
+    void resetStock();
 private:
     // the beginning of the list
     // how many nodes are there in the list?
