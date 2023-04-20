@@ -1,6 +1,7 @@
 #include <iostream>
 #include "LinkedList.h"
 #include <iomanip>
+#include <cmath>
 
 
 
@@ -49,14 +50,42 @@ int main(int argc, char **argv)
         else if (choice == "4") {
             std::string newId = itemstock.nextID();
             std::cout<<"The id of the new stock will be: "<< newId << std::endl;
-            choice = itemstock.addNewNode(newId);
-            choice = mainMenu();
+
+            std::string name, description,prc;
+
+            std::cout << "Enter the Item name: ";
+            std::getline(std::cin, name);
+            if (name.empty()) {
+                choice = mainMenu();
+            }else {
+                std::cout << "Enter the item description: ";
+                std::getline(std::cin, description);
+                if (description.empty()){
+                    choice = mainMenu();
+                }else{
+                    std::cout << "Enter the price for the item: ";
+                    std::getline(std::cin, prc);
+                    if (prc.empty()){
+                        choice = mainMenu(); 
+                    }
+                    else{
+                        double price = std::stod(prc);
+                        choice = itemstock.addNewNode(newId,name,description,price);
+                        choice = mainMenu();
+                    }
+                }
+            }
         }
         else if (choice == "5") {
             std::cout<<"Enter the item id of the item to remove from the menu: "<< std::endl;
             std::string id_name = readInput();
-            itemstock.remove(id_name);
-            choice = mainMenu();
+            if (id_name.empty()){
+                choice = mainMenu();
+            }
+            else{
+                itemstock.remove(id_name);
+                choice = mainMenu();  
+            }
         }
         else if (choice == "6") {
             std::cout<<"choice 6"<<std::endl;
@@ -71,6 +100,7 @@ int main(int argc, char **argv)
             choice = mainMenu();
         }
         else if (choice == "9") {
+            itemstock.~LinkedList();
             return EXIT_SUCCESS;
         }
         else{

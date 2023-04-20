@@ -170,17 +170,7 @@ std::string LinkedList::nextID() {
 }
 
 
-std::string LinkedList::addNewNode(const std::string& newId) {
-    // Prompt the user for input
-    std::string name, description;
-    double price;
-    std::cout << "Enter the Item name: ";
-    std::getline(std::cin, name);
-    std::cout << "Enter the item description: ";
-    std::getline(std::cin, description);
-    std::cout << "Enter the price for the item: ";
-    std::cin >> price;
-
+std::string LinkedList::addNewNode(const std::string& newId, const std::string& name, const std::string& description, double price) {
     // Create a new Node and populate it with the provided data
     Node* newNode = new Node();
     newNode->data->id = newId;
@@ -232,9 +222,7 @@ std::string LinkedList::addNewNode(const std::string& newId) {
     count++;
 
     std::cout<< "This item " <<'"'<< name << "-"<< description <<'"' <<" has now been added to the menu."<< std::endl;
-    std::string input;
-    std::getline(std::cin, input);
-    return input;
+    return "0";
 }
 
 
