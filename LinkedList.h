@@ -15,7 +15,7 @@ public:
     void sortByName();
     void remove(std::string id);
     std::string nextID();
-    std::string addNewNode(const std::string& newId, const std::string& name, const std::string& description, double price);
+    std::string addNewNode(const std::string& newId, const std::string& name, const std::string& description, int dollars, int cents);
     void resetStock();
 private:
     // the beginning of the list
