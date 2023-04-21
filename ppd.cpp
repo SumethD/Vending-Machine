@@ -56,22 +56,44 @@ int main(int argc, char **argv)
             std::cout << "Enter the Item name: ";
             std::getline(std::cin, name);
             if (name.empty()) {
+                std::cout<<"Cancelling [add item] as requested." << std::endl;
                 choice = mainMenu();
             }else {
                 std::cout << "Enter the item description: ";
                 std::getline(std::cin, description);
                 if (description.empty()){
+                    std::cout<<"Cancelling [add item] as requested.." << std::endl;
                     choice = mainMenu();
                 }else{
                     std::cout << "Enter the price for the item: ";
                     std::getline(std::cin, prc);
+                    double price ;
+                    
                     if (prc.empty()){
+                        std::cout<<"Cancelling [add item] as requested." << std::endl;
                         choice = mainMenu(); 
                     }
                     else{
-                        double price = std::stod(prc);
-                        choice = itemstock.addNewNode(newId,name,description,price);
-                        choice = mainMenu();
+                        try {
+                            price = std::stod(prc);
+                            choice = itemstock.addNewNode(newId,name,description,price);
+                            choice = mainMenu();
+                            } catch (const std::invalid_argument& e) {
+                                bool corrprc = false;
+                                while (!corrprc){
+                                    std::cerr << "Enter price in dollars and cents" << std::endl;
+                                    std::cout << "Enter the price for the item: ";
+                                    std::getline(std::cin, prc);
+                                    try {
+                                        price = std::stod(prc);
+                                        corrprc = true;
+                                        choice = itemstock.addNewNode(newId,name,description,price);
+                                        choice = mainMenu();
+                                    } catch (const std::invalid_argument& e) {
+                                        corrprc = false;
+                                    }
+                                }
+                                }
                     }
                 }
             }
@@ -87,21 +109,20 @@ int main(int argc, char **argv)
                 choice = mainMenu();  
             }
         }
-        else if (choice == "6") {
+        else if (choice == "6") {  //to do
             std::cout<<"choice 6"<<std::endl;
             choice = mainMenu();
         }
-        else if (choice == "7") {
+        else if (choice == "7") {  //to do
             itemstock.resetStock();
             choice = mainMenu();
         }
-        else if (choice == "8") {
+        else if (choice == "8") {  //to do
             std::cout<<"choice 8"<<std::endl;
             choice = mainMenu();
         }
-        else if (choice == "9") {
-            itemstock.~LinkedList();
-            return EXIT_SUCCESS;
+        else if (choice == "9") {  // segmentation error needs to be fixed 
+            exit(0);
         }
         else{
             std::cout<<"Invalid Input please re-enter"<<"\n"<<std::endl;

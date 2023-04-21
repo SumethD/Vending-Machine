@@ -15,13 +15,18 @@ LinkedList::LinkedList() {
 }
 
 LinkedList::~LinkedList() {
+    if (head == nullptr) {
+        return;
+    }
     Node* current = head;
-    while (current != nullptr)
+    Node* next = head->next;
+    while (next != nullptr)
     {
-        Node* next = current->next;
         delete current;
         current = next;
+        next = current->next;
     }
+    delete current;
     head = nullptr;
     count = 0;
 }
@@ -184,7 +189,6 @@ std::string LinkedList::addNewNode(const std::string& newId, const std::string& 
     int cents = ((price - dollars) * 100);
 
     double frac_part = std::abs(price - std::trunc(price));
-    std::cout << frac_part;
     while (!(frac_part == 0.0 || std::abs(frac_part - 0.05) < 1e-9 || std::abs(frac_part - 0.5) < 1e-9 )){
         std::cout << "Error: the cents need to be a multiple of 5."; 
         std::cout << "Enter the price for the item: ";
@@ -221,8 +225,9 @@ std::string LinkedList::addNewNode(const std::string& newId, const std::string& 
     }
     count++;
 
-    std::cout<< "This item " <<'"'<< name << "-"<< description <<'"' <<" has now been added to the menu."<< std::endl;
-    return "0";
+    std::cout<< "This item " <<'"'<< name << "-"<< description <<'"' <<" has now been added to the menu."<< "\n"<<  std::endl;
+    std::string input;
+    return input;
 }
 
 
