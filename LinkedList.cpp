@@ -175,7 +175,7 @@ std::string LinkedList::nextID() {
 }
 
 
-std::string LinkedList::addNewNode(const std::string& newId, const std::string& name, const std::string& description, double price) {
+std::string LinkedList::addNewNode(const std::string& newId, const std::string& name, const std::string& description, int dollars, int cents) {
     // Create a new Node and populate it with the provided data
     Node* newNode = new Node();
     newNode->data->id = newId;
@@ -183,22 +183,6 @@ std::string LinkedList::addNewNode(const std::string& newId, const std::string& 
     newNode->data->description = description;
     newNode->data->on_hand = 20;
 
-
-
-    int dollars = std::floor(price); // get integer part of the price
-    int cents = ((price - dollars) * 100);
-
-    double frac_part = std::abs(price - std::trunc(price));
-    while (!(frac_part == 0.0 || std::abs(frac_part - 0.05) < 1e-9 || std::abs(frac_part - 0.5) < 1e-9 )){
-        std::cout << "Error: the cents need to be a multiple of 5."; 
-        std::cout << "Enter the price for the item: ";
-        std::cin >> price;
-        dollars = std::floor(price); // get integer part of the price
-        cents = ((price - dollars) * 100);
-        frac_part = std::abs(price - std::trunc(price));
-    }
-
-    // ((frac_part *100)%5 == 0.0 &&  (frac_part == 0.1 || frac_part == 0.2 || frac_part == 0.3 || frac_part == 0.4 || frac_part == 0.6 || frac_part == 0.7  || frac_part == 0.8|| frac_part == 0.9))
 
     if (cents == 0){
             std::stringstream ss;
