@@ -101,6 +101,7 @@ int main(int argc, char **argv)
                                     double difference = std::fabs(cents - nearest_multiple_of_5); // get the absolute difference
                                     while (!(difference < epsilon))
                                     {
+                                        std::cout << "Error:Enter dollars and cents";
                                         std::cout << "Enter the price for the item: ";
                                         std::getline(std::cin, prc);
 
