@@ -6,11 +6,6 @@
 #include <cstdlib>
 #include <fstream>
 
-<<<<<<< HEAD
-#include <fstream>
-
-=======
->>>>>>> bfb76a03d03fbc9c696708c3491993421dceeeb5
 
 /**
  * manages the running of the program, initialises data structures, loads
@@ -35,10 +30,7 @@ int main(int argc, char **argv)
     LinkedList itemstock;
     Coin coinstock;
 
-<<<<<<< HEAD
 
-=======
->>>>>>> bfb76a03d03fbc9c696708c3491993421dceeeb5
     std::string filename = stockFile;
     std::string coinsf = coinsFile;
     
@@ -48,23 +40,10 @@ int main(int argc, char **argv)
     std::string new_coinsfile = "new_coins.dat";
     std::string new_stockfile = "new_stock.dat";
 
-<<<<<<< HEAD
-    
-    std::string stock_file;
-    std::string coins_file;
-
-    std::string new_coinsfile = "new_coins.dat";
-    std::string new_stockfile = "new_stock.dat";
-
     coinstock.loadCoin(coinsf);
     itemstock.loadData(filename);
 
 
-=======
-    coinstock.loadCoin(coinsf);
-    itemstock.loadData(filename);
-
->>>>>>> bfb76a03d03fbc9c696708c3491993421dceeeb5
     itemstock.sortByName();
     choice = mainMenu();
     bool exitLoop = false;
@@ -78,44 +57,14 @@ int main(int argc, char **argv)
             choice = mainMenu();
         }
         else if (choice == "2") {
-
-<<<<<<< HEAD
-
-=======
->>>>>>> bfb76a03d03fbc9c696708c3491993421dceeeb5
             choice = mainMenu();
         }
-
-        
-
-        
-<<<<<<< HEAD
-
-        
-
-        
-=======
->>>>>>> bfb76a03d03fbc9c696708c3491993421dceeeb5
         else if (choice == "3") {
-
             itemstock.saveStock(new_stockfile);
             coinstock.storeCoins(new_coinsfile);
             return 0;
-
         }
 
-
-
-
-        
-<<<<<<< HEAD
-
-
-
-
-        
-=======
->>>>>>> bfb76a03d03fbc9c696708c3491993421dceeeb5
         else if (choice == "4") {
             std::string newId = itemstock.nextID();
             std::cout << "The id of the new stock will be: " << newId << std::endl;
