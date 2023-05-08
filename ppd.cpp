@@ -53,7 +53,106 @@ int main(int argc, char **argv)
         }
         else if (choice == "2") {
 
-            choice = mainMenu();
+            std::string itemId, name, desc;
+            double price;
+            int stockCount;
+
+
+            std::cout << "Purchase Item" << std::endl;
+            std::cout << "-------------" << std::endl;
+            std::cout << "Please enter the id of the item you wish to purchase: ";
+            std::getline(std::cin, itemId);
+            bool validId = false;
+
+
+
+            bool foundItem = false;
+            for (int i = 0; i < itemstock.getLength() && !foundItem; i++) {
+                Item* item = itemstock.get(i);
+                if (item->getId() == itemId) {
+                    name = item->getName();
+                    desc = item->getDescription();
+                    price = item->getPrice();
+                    stockCount = item->getStockCount();
+                    validId = true;
+                    foundItem = true;
+                }
+            }
+
+
+            /*
+
+
+            for (int i = 0; i < itemstock.getLength(); i++) {
+                Item* item = itemstock.get(i);
+                if (item->getId() == itemId) {
+                    name = item->getName();
+                    desc = item->getDescription();
+                    price = item->getPrice();
+                    stockCount = item->getStockCount();
+                    validId = true;
+                    break;
+                }
+            }
+
+            */
+
+
+            if(!validId){
+                std::cout << "Invalid item ID." << std::endl; ////move to getID
+                choice = mainMenu();
+            }
+            else if(stockCount <= 0){
+                std::cout << "This item is out of stock." << std::endl;
+                choice = mainMenu();
+            }
+
+
+
+            else{
+                std::cout << "You have selected \"" << name << "\". This will cost you $ " << std::fixed << std::setprecision(2) << price << "." << std::endl;
+                double amountPaid = 0.0;
+                double remainingAmount = price;
+                bool transactionCancelled = false;
+                while (remainingAmount > 0.0 && !transactionCancelled) {
+
+
+                    std::cout << "Please hand over the money - type in the value of each note/coin in cents." << std::endl;
+                    std::string input;
+                    std::getline(std::cin, input);
+
+
+                    if (input.empty()) {
+                    // Transaction cancelled, refund the amount paid and return to main menu
+                    std::cout << "Transaction cancelled. Refunding $" << amountPaid << "." << std::endl;
+                    ///////// ADD REFUND FUNCTIONAILITY ///////////
+                    choice = mainMenu();
+                    }
+                    else{
+                        int amount = std::stoi(input);
+                        if (amount < 0) {
+                            std::cout << "Invalid amount. Please try again." << std::endl;
+                        }
+                        else if(amount > remainingAmount * 100){
+                            std::cout << "You have paid too much. Your change is $" << amountPaid - price << "." << std::endl;
+                            ////// refund coins amt paid - price
+                            choice = mainMenu();
+                            transactionCancelled = true;
+
+                        }
+                        else if(!coinstock.isValidCoin(amount)){
+                            std::cout << "Invalid denomination of money. Please try again." << std::endl;
+                        }
+                        else{
+                            amountPaid += amount / 100.0;
+                            remainingAmount -= amount / 100.0;
+                            if (remainingAmount == 0.0) {
+                                std::cout << "Here is your " << name << "." << std::endl;
+                                itemstock.get(itemId)->reduceStockCount(1);
+                                updateCoinStock(amountPaid);
+                                choice = mainMenu();
+                                transactionCancelled = true;
+                                }
         }
 
         
