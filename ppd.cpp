@@ -36,9 +36,12 @@ int main(int argc, char **argv)
     std::string stock_file;
     std::string coins_file;
 
+    std::string new_coinsfile = "new_coins.dat";
+    std::string new_stockfile = "new_stock.dat";
 
     coinstock.loadCoin(coinsf);
     itemstock.loadData(filename);
+
     itemstock.sortByName();
     choice = mainMenu();
     bool exitLoop = false;
@@ -61,24 +64,25 @@ int main(int argc, char **argv)
         
         else if (choice == "3") {
 
-
-
-
-            std::ofstream stock_file(stockFile);
-            std::ofstream coins_file(coinsFile);
-
-            if (stock_file.is_open() && coins_file.is_open()) {
-                itemstock.writeData(stock_file); // Pass ofstream object as reference
-                coinstock.writeCoin(coins_file);
-                stock_file.close();
-                coins_file.close();
-                std::cout << "Data saved successfully." << std::endl;
-                exit(0);
+            std::ifstream existing_file(filename);
+            if (!existing_file.is_open()) {
+                std::cerr << "Error: Cannot open existing file " << filename << std::endl;
+                return 1;
             }
-            else {
-                std::cerr << "Error: Cannot open file." << std::endl;
-                exit(1);
+            std::ofstream new_file(new_stockfile);
+            if (!new_file.is_open()) {
+                std::cerr << "Error: Cannot open new file " << new_stockfile << std::endl;
+                existing_file.close();
+                return 1;
+                }
+            std::string line;
+            while (std::getline(existing_file, line)) {
+                new_file << line << std::endl;
             }
+            existing_file.close();
+            new_file.close();
+            std::cout << "Contents of " << filename << " copied to " << new_stockfile << std::endl;
+            return 0;
 
             /*std::ofstream stock_file(stockFile);
             std::ofstream coins_file(coinsFile);
