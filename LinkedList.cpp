@@ -244,20 +244,31 @@ void LinkedList::resetStock() {
     file.close();
 }*/
 
-void LinkedList::writeData(std::ostream& filename)const {
-    std::ofstream file;
-    file.open(&filename == &std::cout ? "/dev/null" : dynamic_cast<std::ostringstream&>(filename).str());
+void LinkedList::saveStock(const std::string& filename) const {
+    std::ofstream file(filename);
+
     if (!file.is_open()) {
+        std::cerr << "Error: Cannot open file " << filename << std::endl;
         return;
     }
 
     Node* current = head;
+
     while (current != nullptr) {
-        file << current->data->id << "|" << current->data->name << "|" << current->data->description << "|" << current->data->price.dollars << "." << std::setw(2) << std::setfill('0') << current->data->price.cents << "|" << current->data->on_hand << std::endl;
+        file << std::setfill('0') << std::setw(4) << current->data->id << "|" 
+             << current->data->name << "|" 
+             << current->data->description << "|" 
+             << current->data->price.dollars << "." 
+             << std::setw(2) << std::setfill('0') << current->data->price.cents << "|" 
+             << current->data->on_hand << std::endl;
+
         current = current->next;
     }
 
     file.close();
+
+    std::cout << "Data saved to file " << filename << std::endl;
 }
+
 
 

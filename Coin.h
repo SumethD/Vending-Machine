@@ -26,7 +26,7 @@ public:
     void loadCoin(const std::string& filename);
     void printCoins();
     void resetCoins();
-    void writeCoin(std::ofstream& coins_file) const;
+    void storeCoins(const std::string& filename) const ;
     
 };
 

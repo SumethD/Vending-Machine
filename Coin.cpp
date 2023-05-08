@@ -114,75 +114,24 @@ void Coin::resetCoins() {
 
 }
 
-
-
-void Coin::writeCoin(std::ofstream& coins_file) const {
-    for (const auto& entry : coinCounts) {
-        coins_file << entry.first << DELIM << entry.second << '\n';
+void Coin::storeCoins(const std::string& filename) const {
+    std::ofstream file(filename);
+    if (!file.is_open()) {
+        std::cout << "Error opening file " << filename << std::endl;
+        return;
     }
+
+    // write coin counts to file in format "denom|count"
+    file << "5" << DELIM << coinCounts[5] << std::endl;
+    file << "10" << DELIM << coinCounts[10] << std::endl;
+    file << "20" << DELIM << coinCounts[20] << std::endl;
+    file << "50" << DELIM << coinCounts[50] << std::endl;
+    file << "100" << DELIM << coinCounts[100] << std::endl;
+    file << "200"<< DELIM << coinCounts[200] << std::endl;
+    file << "500" << DELIM << coinCounts[500] << std::endl;
+    file << "1000" << DELIM << coinCounts[1000] << std::endl;
+
+    file.close();
 }
-
-
-
-/*bool Coin::isValidCoin(int amount) const {
-    switch (Denomination(denom)) {
-        case FIVE_CENTS:
-            if (amount == 5) {
-                return true;
-            }
-            // fall-through intentional
-        case TEN_CENTS:
-            if (amount == 10) {
-                return true;
-            }
-            // fall-through intentional
-        case TWENTY_CENTS:
-            if (amount == 20) {
-                return true;
-            }
-            // fall-through intentional
-        case FIFTY_CENTS:
-            if (amount == 50) {
-                return true;
-            }
-            // fall-through intentional
-        case ONE_DOLLAR:
-            if (amount == 100) {
-                return true;
-            }
-            // fall-through intentional
-        case TWO_DOLLARS:
-            if (amount == 200) {
-                return true;
-            }
-            // fall-through intentional
-        case FIVE_DOLLARS:
-            if (amount == 500) {
-                return true;
-            }
-            // fall-through intentional
-        case TEN_DOLLARS:
-            if (amount == 1000) {
-                return true;
-            }
-            // fall-through intentional
-        default:
-            return false;
-    }
-}*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
