@@ -19,6 +19,9 @@ public:
     void resetStock();;
     void writeData(std::ostream& filename)const;
 
+    void StockchangeTodefault();;
+    void WritetoFile(std::ostream& filename)const;
+
 
 private:
     // the beginning of the list
