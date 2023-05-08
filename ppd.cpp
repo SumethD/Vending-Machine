@@ -58,7 +58,7 @@ int main(int argc, char **argv)
         }
         else if (choice == "2") {
 
-            std::cout << "TEST_2" << std::endl;
+            /*std::cout << "TEST_2" << std::endl;
             std::string itemId, name, desc;
             double price;
             int stockCount;
@@ -80,7 +80,8 @@ int main(int argc, char **argv)
                 std::cout << "Invalid item ID." << std::endl; ////move to getID
                 std::cout << "bunga." << std::endl; ////move to getID
                 //choice = mainMenu();
-            }
+            }*/
+            choice = mainMenu();
         }
 
         else if (choice == "3") {
