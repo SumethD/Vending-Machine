@@ -50,6 +50,7 @@ int main(int argc, char **argv)
         if (choice.empty()) {
             exitLoop = true;
         }
+        //displays item if 1 input
         else if (choice == "1") {
             std::string newd = displayItems(itemstock);
             choice = mainMenu();
