@@ -246,5 +246,51 @@ void LinkedList::saveStock(const std::string& filename) const {
     std::cout << "Data saved to file " << filename << std::endl;
 }
 
+bool LinkedList::get(std::string id) {
+    Node* current = head;
+    bool isPresent = false;
+    while(current != nullptr){
+        std::string new_id = current->data->id;
+
+        if(new_id == id){
+            isPresent = true;
+            break;  // exit the loop as soon as id is found
+        }
+        current = current->next; // move to next node
+    }
+    return isPresent;
+}
+
+Price LinkedList::getPrice(std::string id) {
+    Node* curr = head;
+    while(curr != nullptr){
+        std::string new_id = curr->data->id;
+        Price pr = curr->data->price;
+
+        if(new_id == id){
+            return pr;
+        }
+
+        curr = curr->next;
+    }
+
+    // Item with the given ID was not found, return a default Price object
+    return Price{0, "00"};
+}
+Stock* LinkedList::getStock(std::string id) {
+    Node* curr = head;
+    while(curr != nullptr){
+        std::string new_id = curr->data->id;
+        Stock* stock = curr->data;
+
+        if(new_id == id){
+            return stock;
+        }
+
+        curr = curr->next; // move to the next node
+    }
+
+    return nullptr; // ID not found, return nullptr
+}
 
 

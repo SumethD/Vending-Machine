@@ -55,8 +55,36 @@ int main(int argc, char **argv)
             choice = mainMenu();
         }
         else if (choice == "2") {
-
-            choice = mainMenu();
+            std::string item_id;
+            int cents,item_prc;
+            int remainder =1;
+            std::cout << "Purchase Item" << std::endl;
+            std::cout << "--------------------" << std::endl;
+            std::cout << "Please enter the id of the item you wish to purchase:" << std::endl;
+            std::getline(std::cin, item_id);
+            if(itemstock.get(item_id)){
+                Price prc= itemstock.getPrice(item_id);
+                Stock * itm = itemstock.getStock(item_id);
+                std::string price_str = std::to_string(prc.dollars) + "." + prc.cents;
+                item_prc = std::stod(price_str) * 100;
+                std::cout << item_prc << std::endl;
+                std::cout << "You have selected "<< '"'<< itm->name << "-"<<itm->description <<'"'<<".This will cost you $"<< prc.dollars<<"."<<prc.cents<< std::endl;
+                std::cout << "Please hand over the money - type in the value of each note/coin in cents." << std::endl;
+                std::cin >> cents;
+                while (remainder !=0){
+                    remainder = cents -item_prc;
+                    coinstock.newCoin(cents);
+                    if (remainder >0){
+                        double change = static_cast<double>(cents) /100.0;
+                        int dol_chg = floor(change);
+                        
+                        std::cout << "Here is your change "<< std::endl;
+                    }
+                }
+            }
+            else{
+                exitLoop= true;
+            }
         }
 
         else if (choice == "3") {

@@ -18,6 +18,9 @@ public:
     std::string addNewNode(const std::string& newId, const std::string& name, const std::string& description, int dollars, int cents);
     void resetStock();
     void saveStock(const std::string& filename) const;
+    bool get(std::string id);
+    Price getPrice(std::string id);
+    Stock* getStock(std::string id);
 private:
     // the beginning of the list
     // how many nodes are there in the list?

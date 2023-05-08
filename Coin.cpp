@@ -134,4 +134,8 @@ void Coin::storeCoins(const std::string& filename) const {
     file.close();
 }
 
+void Coin::newCoin(int cents){
+    coinCounts[cents] = coinCounts[cents] +1 ;
+}
+
 
