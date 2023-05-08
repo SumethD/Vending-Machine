@@ -30,7 +30,6 @@ int main(int argc, char **argv)
     LinkedList itemstock;
     Coin coinstock;
 
-
     std::string filename = stockFile;
     std::string coinsf = coinsFile;
     
@@ -42,7 +41,6 @@ int main(int argc, char **argv)
 
     coinstock.loadCoin(coinsf);
     itemstock.loadData(filename);
-
 
     itemstock.sortByName();
     choice = mainMenu();
@@ -57,8 +55,10 @@ int main(int argc, char **argv)
             choice = mainMenu();
         }
         else if (choice == "2") {
+
             choice = mainMenu();
         }
+
         else if (choice == "3") {
             itemstock.saveStock(new_stockfile);
             coinstock.storeCoins(new_coinsfile);
