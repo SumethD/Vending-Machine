@@ -51,15 +51,39 @@ int main(int argc, char **argv)
             exitLoop = true;
         }
         else if (choice == "1") {
+            std::cout << "TEST_1" << std::endl;
             std::string newd = displayItems(itemstock);
             choice = mainMenu();
         }
         else if (choice == "2") {
 
-            choice = mainMenu();
+            std::cout << "TEST_2" << std::endl;
+            std::string itemId, name, desc;
+            double price;
+            int stockCount;
+
+            std::cout << "Purchase Item" << std::endl;
+            std::cout << "-------------" << std::endl;
+            std::cout << "Please enter the id of the item you wish to purchase: ";
+            std::getline(std::cin, itemId);
+            bool validId = false;
+            bool foundItem = false;
+
+            if (itemstock.get(itemId) == true)
+            {
+                unsigned stock_count = itemstock.getStock(itemId);
+                Price item_price = itemstock.getPrice(itemId);
+                std::cout << "unga " << std::endl; 
+            }
+            else{
+                std::cout << "Invalid item ID." << std::endl; ////move to getID
+                std::cout << "bunga." << std::endl; ////move to getID
+                //choice = mainMenu();
+            }
         }
 
         else if (choice == "3") {
+            std::cout << "TEST_3" << std::endl;
             itemstock.saveStock(new_stockfile);
             coinstock.storeCoins(new_coinsfile);
             return 0;
