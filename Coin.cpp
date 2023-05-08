@@ -109,7 +109,6 @@ void Coin::resetCoins() {
     coinCounts[100] = 20;
     coinCounts[200] = 20;
     coinCounts[500] = 20;
-    coinCounts[100] = 20;
     coinCounts[1000] = 20;
     std::cout<< "All coins have been set to 20 "<< std::endl;
 
