@@ -124,7 +124,7 @@ void Coin::writeCoin(std::ofstream& coins_file) const {
 
 
 
-/*bool Coin::isValidCoin(int amount) const {
+bool Coin::isValidCoin(int amount) const {
     switch (Denomination(denom)) {
         case FIVE_CENTS:
             if (amount == 5) {
@@ -169,7 +169,7 @@ void Coin::writeCoin(std::ofstream& coins_file) const {
         default:
             return false;
     }
-}*/
+}
 
 
 
