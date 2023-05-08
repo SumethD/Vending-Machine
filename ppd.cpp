@@ -4,6 +4,8 @@
 #include <iomanip>
 #include <cmath>
 #include <cstdlib>
+#include <fstream>
+
 
 /**
  * manages the running of the program, initialises data structures, loads
@@ -27,10 +29,19 @@ int main(int argc, char **argv)
     std::string coinsFile = argv[2];
     LinkedList itemstock;
     Coin coinstock;
+
     std::string filename = stockFile;
     std::string coinsf = coinsFile;
+    
+    std::string stock_file;
+    std::string coins_file;
+
+    std::string new_coinsfile = "new_coins.dat";
+    std::string new_stockfile = "new_stock.dat";
+
     coinstock.loadCoin(coinsf);
     itemstock.loadData(filename);
+
     itemstock.sortByName();
     choice = mainMenu();
     bool exitLoop = false;
@@ -44,13 +55,25 @@ int main(int argc, char **argv)
             choice = mainMenu();
         }
         else if (choice == "2") {
-            std::cout << "choice 2" << std::endl;
+
             choice = mainMenu();
         }
+
+        
+
+        
         else if (choice == "3") {
-            std::cout << "choice 3" << std::endl;
-            choice = mainMenu();
+
+            itemstock.saveStock(new_stockfile);
+            coinstock.storeCoins(new_coinsfile);
+            return 0;
+
         }
+
+
+
+
+        
         else if (choice == "4") {
             std::string newId = itemstock.nextID();
             std::cout << "The id of the new stock will be: " << newId << std::endl;
