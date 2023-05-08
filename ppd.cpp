@@ -1,5 +1,6 @@
 #include <iostream>
 #include "LinkedList.h"
+#include "Coin.h"
 #include <iomanip>
 #include <cmath>
 #include <cstdlib>
@@ -25,7 +26,10 @@ int main(int argc, char **argv)
     std::string stockFile = argv[1];
     std::string coinsFile = argv[2];
     LinkedList itemstock;
+    Coin coinstock;
     std::string filename = stockFile;
+    std::string coinsf = coinsFile;
+    coinstock.loadCoin(coinsf);
     itemstock.loadData(filename);
     itemstock.sortByName();
     choice = mainMenu();
@@ -144,7 +148,7 @@ int main(int argc, char **argv)
         }
         else if (choice == "6")
         { // to do
-            std::cout << "choice 6" << std::endl;
+            coinstock.printCoins();
             choice = mainMenu();
         }
         else if (choice == "7")
@@ -154,7 +158,7 @@ int main(int argc, char **argv)
         }
         else if (choice == "8")
         { // to do
-            std::cout << "choice 8" << std::endl;
+            coinstock.resetCoins();
             choice = mainMenu();
         }
         else if (choice == "9")
