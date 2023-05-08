@@ -1,8 +1,9 @@
 #ifndef COIN_H
 #define COIN_H
+#include "Node.h"
 
 // Coin.h defines the coin structure for managing currency in the system. 
-#define DELIM ","  // delimiter 
+#define DELIM ','  // delimiter 
 
 // enumeration representing the various types of currency available in the system. 
 enum Denomination
@@ -22,6 +23,10 @@ public:
     
     // the count of how many of these are in the cash register
     unsigned count;
+    void loadCoin(const std::string& filename);
+    void printCoins();
+    void resetCoins();
+    
 };
 
 #endif // COIN_H
