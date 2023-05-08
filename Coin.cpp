@@ -114,3 +114,75 @@ void Coin::resetCoins() {
 
 }
 
+
+
+void Coin::writeCoin(std::ofstream& coins_file) const {
+    for (const auto& entry : coinCounts) {
+        coins_file << entry.first << DELIM << entry.second << '\n';
+    }
+}
+
+
+
+/*bool Coin::isValidCoin(int amount) const {
+    switch (Denomination(denom)) {
+        case FIVE_CENTS:
+            if (amount == 5) {
+                return true;
+            }
+            // fall-through intentional
+        case TEN_CENTS:
+            if (amount == 10) {
+                return true;
+            }
+            // fall-through intentional
+        case TWENTY_CENTS:
+            if (amount == 20) {
+                return true;
+            }
+            // fall-through intentional
+        case FIFTY_CENTS:
+            if (amount == 50) {
+                return true;
+            }
+            // fall-through intentional
+        case ONE_DOLLAR:
+            if (amount == 100) {
+                return true;
+            }
+            // fall-through intentional
+        case TWO_DOLLARS:
+            if (amount == 200) {
+                return true;
+            }
+            // fall-through intentional
+        case FIVE_DOLLARS:
+            if (amount == 500) {
+                return true;
+            }
+            // fall-through intentional
+        case TEN_DOLLARS:
+            if (amount == 1000) {
+                return true;
+            }
+            // fall-through intentional
+        default:
+            return false;
+    }
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

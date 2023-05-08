@@ -16,11 +16,15 @@ public:
     void remove(std::string id);
     std::string nextID();
     std::string addNewNode(const std::string& newId, const std::string& name, const std::string& description, int dollars, int cents);
-    void resetStock();
+    void resetStock();;
+    void writeData(std::ostream& filename)const;
+
+
 private:
     // the beginning of the list
     // how many nodes are there in the list?
     unsigned count;
+    
 };
 
 #endif  // LINKEDLIST_H

@@ -4,6 +4,8 @@
 #include <iomanip>
 #include <cmath>
 #include <cstdlib>
+#include <fstream>
+
 
 /**
  * manages the running of the program, initialises data structures, loads
@@ -27,8 +29,14 @@ int main(int argc, char **argv)
     std::string coinsFile = argv[2];
     LinkedList itemstock;
     Coin coinstock;
+
     std::string filename = stockFile;
     std::string coinsf = coinsFile;
+    
+    std::string stock_file;
+    std::string coins_file;
+
+
     coinstock.loadCoin(coinsf);
     itemstock.loadData(filename);
     itemstock.sortByName();
@@ -44,13 +52,57 @@ int main(int argc, char **argv)
             choice = mainMenu();
         }
         else if (choice == "2") {
-            std::cout << "choice 2" << std::endl;
+
             choice = mainMenu();
         }
+
+        
+
+        
         else if (choice == "3") {
-            std::cout << "choice 3" << std::endl;
-            choice = mainMenu();
+
+
+
+
+            std::ofstream stock_file(stockFile);
+            std::ofstream coins_file(coinsFile);
+
+            if (stock_file.is_open() && coins_file.is_open()) {
+                itemstock.writeData(stock_file); // Pass ofstream object as reference
+                coinstock.writeCoin(coins_file);
+                stock_file.close();
+                coins_file.close();
+                std::cout << "Data saved successfully." << std::endl;
+                exit(0);
+            }
+            else {
+                std::cerr << "Error: Cannot open file." << std::endl;
+                exit(1);
+            }
+
+            /*std::ofstream stock_file(stockFile);
+            std::ofstream coins_file(coinsFile);
+
+            if (stock_file.is_open() && coins_file.is_open()) {
+                itemstock.writeData(stock_file);
+                coinstock.writeCoin(coins_file);
+                stock_file.close();
+                coins_file.close();
+                std::cout << "Data saved successfully." << std::endl;
+                exit(0);
+            }
+            else {
+                std::cerr << "Error: Cannot open file." << std::endl;
+                exit(1);
+            }*/
+
+
         }
+
+
+
+
+        
         else if (choice == "4") {
             std::string newId = itemstock.nextID();
             std::cout << "The id of the new stock will be: " << newId << std::endl;
