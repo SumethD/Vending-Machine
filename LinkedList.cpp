@@ -259,3 +259,5 @@ void LinkedList::writeData(std::ostream& filename)const {
 
     file.close();
 }
+
+
