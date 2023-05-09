@@ -74,12 +74,12 @@ int main(int argc, char **argv)
                 while (remainder !=0){
                     remainder = cents -item_prc;
                     coinstock.newCoin(cents);
-                    if (remainder >0){
-                        double change = static_cast<double>(cents) /100.0;
-                        int dol_chg = floor(change);
+                    // if (remainder >0){
+                    //     double change = static_cast<double>(cents) /100.0;
+                    //     int dol_chg = floor(change);
                         
-                        std::cout << "Here is your change "<< std::endl;
-                    }
+                    //     std::cout << "Here is your change "<< std::endl;
+                    // }
                 }
             }
             else{
