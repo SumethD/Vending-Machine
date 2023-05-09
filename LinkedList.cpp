@@ -214,7 +214,6 @@ std::string LinkedList::addNewNode(const std::string& newId, const std::string& 
     return input;
 }
 
-
 void LinkedList::resetStock() {
     Node* current = head;
     while (current != nullptr) {

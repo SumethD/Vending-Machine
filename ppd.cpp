@@ -6,7 +6,6 @@
 #include <cstdlib>
 #include <fstream>
 
-
 /**
  * manages the running of the program, initialises data structures, loads
  * data, display the main menu, and handles the processing of options.
@@ -32,9 +31,6 @@ int main(int argc, char **argv)
 
     std::string filename = stockFile;
     std::string coinsf = coinsFile;
-    
-    std::string stock_file;
-    std::string coins_file;
 
     std::string new_coinsfile = "new_coins.dat";
     std::string new_stockfile = "new_stock.dat";
