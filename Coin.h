@@ -20,7 +20,6 @@ class Coin
 public:
     // the denomination type
     enum Denomination denom;
-    
     // the count of how many of these are in the cash register
     unsigned count;
     void loadCoin(const std::string& filename);
