@@ -27,6 +27,7 @@ public:
     void printCoins();
     void resetCoins();
     void storeCoins(const std::string& filename) const ;
+    bool newCoin(int cents);
     
 };
 

@@ -135,4 +135,13 @@ void Coin::storeCoins(const std::string& filename) const {
     file.close();
 }
 
+bool Coin::newCoin(int cents){
+    bool val = false;
+    if (cents == 5 || cents == 10 || cents == 50 || cents == 100 || cents == 200 || cents == 500 || cents == 1000) {
+        coinCounts[cents]++;
+        val = true;
+    }
+    return val;
+}
+
 

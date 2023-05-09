@@ -57,29 +57,50 @@ int main(int argc, char **argv)
         }
         else if (choice == "2") {
 
-            std::cout << "TEST_2" << std::endl;
-            std::string itemId, name, desc;
-            double price;
-            int stockCount;
-
+            std::string item_id;
+            int cents,item_prc;
+            // int remainder =1;
             std::cout << "Purchase Item" << std::endl;
-            std::cout << "-------------" << std::endl;
-            std::cout << "Please enter the id of the item you wish to purchase: ";
-            std::getline(std::cin, itemId);
-            bool validId = false;
-            bool foundItem = false;
-
-            if (itemstock.get(itemId) == true)
-            {
-                unsigned stock_count = itemstock.getStock(itemId);
-                Price item_price = itemstock.getPrice(itemId);
-                std::cout << "unga " << std::endl; 
+            std::cout << "--------------------" << std::endl;
+            std::cout << "Please enter the id of the item you wish to purchase:" << std::endl;
+            std::getline(std::cin, item_id);
+            if(itemstock.get(item_id)){
+                Price prc= itemstock.getPrice(item_id);
+                Stock * itm = itemstock.getStock(item_id);
+                std::string price_str = std::to_string(prc.dollars) + "." + prc.cents;
+                item_prc = std::stod(price_str) * 100;
+                std::cout << item_prc << std::endl;
+                std::cout << "You have selected "<< '"'<< itm->name << "-"<<itm->description <<'"'<<".This will cost you $"<< prc.dollars<<"."<<prc.cents<< std::endl;
+                std::cout << "Please hand over the money - type in the value of each note/coin in cents." << std::endl;
+                std::cin >> cents;
+                std::cout << "TEST_coin"<<std::endl;
+                int change = item_prc;
+                while(change > 0)
+                {
+                    if(coinstock.newCoin(cents) == false)
+                    {
+                        std::cout <<"Error:"<< cents/100.0 <<  "$ is not a valid denomination of money. Please try again."<< std::endl;
+                        std::cin >> cents;
+                    }
+                    else if(coinstock.newCoin(cents) == true) {
+                        change = change - cents;
+                        if (change > 0){
+                            std::cout <<"You still need to give us $" << change/100.0 << ":" <<std::endl;
+                            std::cin >> cents;
+                        }
+                        else{
+                            std::cout <<"Here is your" << itm->name << " and your change of " << change/100.0 << ":" <<std::endl;
+                            change = change - cents;
+                        }
+                        choice = mainMenu();
+                    }
+                }
+                    
             }
             else{
-                std::cout << "Invalid item ID." << std::endl; ////move to getID
-                std::cout << "bunga." << std::endl; ////move to getID
-                //choice = mainMenu();
+                std::cout <<"Item not found."<<std::endl;
             }
+            
         }
 
         else if (choice == "3") {

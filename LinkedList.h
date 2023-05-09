@@ -20,7 +20,7 @@ public:
     void saveStock(const std::string& filename) const;
     bool get(std::string id);
     Price getPrice(std::string id);
-    int getStock(std::string id);
+    Stock* getStock(std::string id);
 private:
     // the beginning of the list
     // how many nodes are there in the list?
