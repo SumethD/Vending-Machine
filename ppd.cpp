@@ -57,7 +57,7 @@ int main(int argc, char **argv)
         else if (choice == "2") {
             std::string item_id;
             int cents,item_prc;
-            int remainder =1;
+            // int remainder =1;
             std::cout << "Purchase Item" << std::endl;
             std::cout << "--------------------" << std::endl;
             std::cout << "Please enter the id of the item you wish to purchase:" << std::endl;
@@ -71,19 +71,14 @@ int main(int argc, char **argv)
                 std::cout << "You have selected "<< '"'<< itm->name << "-"<<itm->description <<'"'<<".This will cost you $"<< prc.dollars<<"."<<prc.cents<< std::endl;
                 std::cout << "Please hand over the money - type in the value of each note/coin in cents." << std::endl;
                 std::cin >> cents;
-                while (remainder !=0){
-                    remainder = cents -item_prc;
-                    coinstock.newCoin(cents);
-                    // if (remainder >0){
-                    //     double change = static_cast<double>(cents) /100.0;
-                    //     int dol_chg = floor(change);
-                        
-                    //     std::cout << "Here is your change "<< std::endl;
-                    // }
-                }
-            }
-            else{
-                exitLoop= true;
+                while(!coinstock.newCoin(cents)){
+                    
+                    std::cout <<"Error:"<< cents/100.0 <<  "$ is not a valid denomination of money. Please try again."<< std::endl;
+                    std::cin >> cents;
+    
+                };
+                return 0;
+                    
             }
         }
 

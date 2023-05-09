@@ -1,7 +1,7 @@
 first run this 
         g++ -Wall -Werror -std=c++14 -O -o main ppd.cpp LinkedList.cpp Node.cpp Coin.cpp 
  then run this 
-        valgrind ./main stock.dat coins.datvalgrind ./main stock.dat coins.dat
+        valgrind ./main stock.dat coins.dat
 
 // Install valgrind to check  for memory leaks 
      step 1:
