@@ -50,7 +50,9 @@ int main(int argc, char **argv)
         if (choice.empty()) {
             exitLoop = true;
         }
+        //displays item if 1 input
         else if (choice == "1") {
+            std::cout << "TEST_1" << std::endl;
             std::string newd = displayItems(itemstock);
             choice = mainMenu();
         }
@@ -83,6 +85,7 @@ int main(int argc, char **argv)
         }
 
         else if (choice == "3") {
+            std::cout << "TEST_3" << std::endl;
             itemstock.saveStock(new_stockfile);
             coinstock.storeCoins(new_coinsfile);
             return 0;

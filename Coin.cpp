@@ -47,6 +47,7 @@ void Coin::loadCoin(const std::string& filename) {
     file.close();
 }
 
+// function to print coins
 void Coin::printCoins() {
     std::cout << std::left << std::setw(15) << "Denomination" << "|" << std::setw(5) << "Count" << std::endl;
     std::cout << "------------------------" << std::endl;
