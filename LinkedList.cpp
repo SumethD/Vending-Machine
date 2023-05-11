@@ -245,16 +245,14 @@ void LinkedList::saveStock(const std::string& filename) const {
     std::cout << "Data saved to file " << filename << std::endl;
 }
 
-bool LinkedList::get(std::string id) {
+bool LinkedList::get(std::string identity) {
     Node* current = head;
     bool isPresent = false;
-    bool found = false;
-    while(current != nullptr && !found){
+    while(current != nullptr){
         std::string new_id = current->data->id;
 
-        if(new_id == id){
+        if(new_id == identity){
             isPresent = true;
-            found = true;  // set flag to true to exit loop
         }
         current = current->next; // move to next node
     }
