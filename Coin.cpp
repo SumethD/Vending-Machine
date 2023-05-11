@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
+#include <vector>
 std::map<int, int> coinCounts;
 
 
@@ -142,6 +143,48 @@ bool Coin::newCoin(int cents){
         val = true;
     }
     return val;
+}
+
+std::vector<int> Coin::getChange(int change) {
+    std::vector<int> changeCoins;
+    int remainingChange = change;
+
+    if (remainingChange > 0) {
+        if (remainingChange >= 1000 ) {
+            coinCounts[1000] = coinCounts[1000]-1;
+            changeCoins.push_back(1000);
+            remainingChange -= 1000;
+        }if (remainingChange >= 500 ) {
+            coinCounts[500]--;
+            changeCoins.push_back(500);
+            remainingChange -= 500;
+        }if (remainingChange >= 200 ) {
+            coinCounts[200]--;
+            changeCoins.push_back(200);
+            remainingChange -= 200;
+        } if (remainingChange >= 100 ) {
+            coinCounts[100] = coinCounts[100]-1;
+            changeCoins.push_back(100);
+            remainingChange -= 100;
+        }if (remainingChange >= 50) {
+            coinCounts[50] = coinCounts[50]-1;
+            changeCoins.push_back(50);
+            remainingChange -= 50;
+        }if (remainingChange >= 10 ) {
+            coinCounts[10]--;
+            changeCoins.push_back(10);
+            remainingChange -= 10;
+        }if (remainingChange >= 5 ) {
+            coinCounts[5] = coinCounts[5] -1;
+            changeCoins.push_back(5);
+            remainingChange -= 5;
+        } if (remainingChange ==0){
+            // No suitable coin found to give change
+           remainingChange =0;
+        }
+    }
+
+    return changeCoins;
 }
 
 

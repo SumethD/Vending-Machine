@@ -1,6 +1,7 @@
 #ifndef COIN_H
 #define COIN_H
 #include "Node.h"
+#include <vector>
 
 // Coin.h defines the coin structure for managing currency in the system. 
 #define DELIM ','  // delimiter 
@@ -28,6 +29,7 @@ public:
     void resetCoins();
     void storeCoins(const std::string& filename) const ;
     bool newCoin(int cents);
+    std::vector<int>getChange(int change);
     
 };
 

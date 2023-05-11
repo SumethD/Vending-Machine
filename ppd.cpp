@@ -5,6 +5,8 @@
 #include <cmath>
 #include <cstdlib>
 #include <fstream>
+#include <vector>
+
 
 
 /**
@@ -57,50 +59,121 @@ int main(int argc, char **argv)
         }
         else if (choice == "2") {
 
-            std::string item_id;
-            int cents,item_prc;
-            // int remainder =1;
+            Stock * itm =nullptr;
+            std::string item_id,final_c="";
+            int cents,item_prc,five_c=0, ten_c=0,twenty_c=0,fifty_c=0,one_d=0,two_d=0,five_d=0,ten_d=0;
+            float int_item;
+            int remainder =1;
+            std::vector<int> change_vec;
             std::cout << "Purchase Item" << std::endl;
             std::cout << "--------------------" << std::endl;
             std::cout << "Please enter the id of the item you wish to purchase:" << std::endl;
             std::getline(std::cin, item_id);
+            itm = itemstock.getStock(item_id);
+
+            if(itm->on_hand == 0)
+            {
+                std::cout << "We are sorry but"<< itm->name << " is not in stock, please choose another item" << std::endl;
+                std::getline(std::cin, item_id);
+            }
+
             if(itemstock.get(item_id)){
                 Price prc= itemstock.getPrice(item_id);
-                Stock * itm = itemstock.getStock(item_id);
+                itm = itemstock.getStock(item_id);
                 std::string price_str = std::to_string(prc.dollars) + "." + prc.cents;
                 item_prc = std::stod(price_str) * 100;
                 std::cout << item_prc << std::endl;
                 std::cout << "You have selected "<< '"'<< itm->name << "-"<<itm->description <<'"'<<".This will cost you $"<< prc.dollars<<"."<<prc.cents<< std::endl;
                 std::cout << "Please hand over the money - type in the value of each note/coin in cents." << std::endl;
                 std::cin >> cents;
-                std::cout << "TEST_coin"<<std::endl;
-                int change = item_prc;
-                while(change > 0)
-                {
-                    if(coinstock.newCoin(cents) == false)
-                    {
-                        std::cout <<"Error:"<< cents/100.0 <<  "$ is not a valid denomination of money. Please try again."<< std::endl;
+
+                if (cents){
+                std::cout << "Cancelling [add item] as requested." << std::endl;
+                choice = mainMenu();
+                }
+
+                while(!coinstock.newCoin(cents)){
+                    
+                    std::cout <<"Error:"<< cents/100.0 <<  "$ is not a valid denomination of money. Please try again."<< std::endl;
+                    std::cin >> cents;
+    
+                };
+                remainder = cents -item_prc;
+                while(remainder !=0){
+                    if (remainder <0){
+                        item_prc = std::abs(remainder); 
+                        int_item = item_prc / 100.0;
+                        std::cout << "You still need to give $" << int_item << std::endl;
                         std::cin >> cents;
-                    }
-                    else if(coinstock.newCoin(cents) == true) {
-                        change = change - cents;
-                        if (change > 0){
-                            std::cout <<"You still need to give us $" << change/100.0 << ":" <<std::endl;
+                        while(!coinstock.newCoin(cents)){
+                            std::cout <<"Error:"<< cents/100.0 <<  "$ is not a valid denomination of money. Please try again."<< std::endl;
                             std::cin >> cents;
+                        };
+                        remainder = cents - item_prc;
+                    }
+                    else if(remainder >0){
+                        change_vec=coinstock.getChange(remainder);
+                        for (int element : change_vec) {
+                            if (element == 1000) {
+                                ten_d += 1;
+                                remainder-= 1000;
+                            } else if (element == 500) {
+                                five_d += 1;
+                                remainder-= 500;
+                            } else if (element == 200) {
+                                two_d += 1;
+                                remainder-= 200;
+                            } else if (element == 100) {
+                                one_d += 1;
+                                remainder-= 100;
+                            } else if (element == 50) {
+                                fifty_c += 1;
+                                remainder-= 50;
+                            } else if (element == 20) {
+                                twenty_c += 1;
+                                remainder-= 20;
+                            } else if (element == 10) {
+                                ten_c += 1;
+                                remainder-= 10;
+                            } else if (element == 5) {
+                                five_c += 1;
+                                remainder-= 5;
+                            }
                         }
-                        else{
-                            std::cout <<"Here is your" << itm->name << " and your change of " << change/100.0 << ":" <<std::endl;
-                            change = change - cents;
+                        if(ten_d>0){
+                            final_c +="$10 ";
                         }
-                        choice = mainMenu();
+                        if(five_d>0){
+                            final_c +="$5 ";
+                        }
+                        if(two_d>0){
+                            final_c +="$2 ";
+                        }
+                        if(one_d>0){
+                            final_c +="$1 ";
+                        }
+                        if(fifty_c>0){
+                            final_c +="50c ";
+                        }
+                        if(twenty_c>0){
+                            final_c +="20c ";
+                        }
+                        if(ten_c>0){
+                            final_c +="10c ";
+                        }
+                        if(five_c>0){
+                            final_c +="5c ";
+                        }
+
+                        // std::cout <<"Here is your "<<itm->name <<" and your change of $ "<<prc.dollars<<"."<<prc.cents<<": "<<final_c<< std::endl;
                     }
                 }
+                std::cout <<"Here is your "<<itm->name <<" and your change of $ "<<prc.dollars<<"."<<prc.cents<<": "<<final_c<< std::endl;
+            }
+            itm->on_hand --;
+            choice = mainMenu();
+            std::getline(std::cin, choice);
                     
-            }
-            else{
-                std::cout <<"Item not found."<<std::endl;
-            }
-            
         }
 
         else if (choice == "3") {
