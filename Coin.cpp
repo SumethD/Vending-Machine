@@ -5,7 +5,10 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
+#include <vector>
+#include <unordered_set>
 std::map<int, int> coinCounts;
+std::unordered_set<int> denoms = {5, 10, 20, 50, 100, 200, 500, 1000};
 
 
 void Coin::loadCoin(const std::string& filename) {
@@ -14,38 +17,49 @@ void Coin::loadCoin(const std::string& filename) {
         std::cout << "Error opening file " << filename << std::endl;
         return;
     }
-     // map to store the coin counts by denomination
+
+    // Initialize coinCounts to 0 for all denoms
+    for (int denom : denoms) {
+        coinCounts[denom] = 0;
+    }
+
     std::string line;
-    while (std::getline(file, line)) {
+    int count_line = 0;
+    while (std::getline(file, line) && count_line < 8) {
         std::istringstream iss(line);
         std::string token;
         std::getline(iss, token, DELIM); // read the denomination
         int denom = std::stoi(token);
         std::getline(iss, token); // read the count
         int count = std::stoi(token);
+
+        // If the denom is not in the set, reject the file
+        if (denoms.find(denom) == denoms.end()) {
+            std::cout << "File rejected: Invalid denomination " << denom << std::endl;
+            // Set all coinCounts to 0 and return
+            for (int denom : denoms) {
+                coinCounts[denom] = 0;
+            }
+            file.close();
+            return;
+        }
+
         coinCounts[denom] = count;
+        count_line++;
     }
 
-    // populate the coin counts in the Coin object
-    denom = FIVE_CENTS;
-    count= coinCounts[5];
-    denom = TEN_CENTS;
-    count = coinCounts[10];
-    denom = TWENTY_CENTS;
-    count = coinCounts[20];
-    denom = FIFTY_CENTS;
-    count = coinCounts[50];
-    denom = ONE_DOLLAR;
-    count = coinCounts[100];
-    denom = TWO_DOLLARS;
-    count = coinCounts[200];
-    denom = FIVE_DOLLARS;
-    count = coinCounts[500];
-    denom = TEN_DOLLARS;
-    count = coinCounts[1000];
+    // If the file has more than 8 lines or less than 8 lines, reject it
+    if (count_line != 8) {
+        std::cout << "File rejected: Invalid number of lines " << count_line << std::endl;
+        // Set all coinCounts to 0
+        for (int denom : denoms) {
+            coinCounts[denom] = 0;
+        }
+    }
 
     file.close();
 }
+
 
 // function to print coins
 void Coin::printCoins() {
@@ -133,6 +147,7 @@ void Coin::storeCoins(const std::string& filename) const {
     file << "1000" << DELIM << coinCounts[1000] << std::endl;
 
     file.close();
+     std::cout << "Saved to new_stock.dat " << filename << std::endl;
 }
 
 bool Coin::newCoin(int cents){
@@ -143,6 +158,74 @@ bool Coin::newCoin(int cents){
     }
     return val;
 }
+
+std::vector<int> Coin::getChange(int change) {
+    std::vector<int> changeCoins;
+    int remainingChange = change;
+
+    if (remainingChange > 0) {
+        if (remainingChange >= 1000 ) {
+            coinCounts[1000] = coinCounts[1000]-1;
+            changeCoins.push_back(1000);
+            remainingChange -= 1000;
+        }while (remainingChange >= 500 ) {
+            coinCounts[500]--;
+            changeCoins.push_back(500);
+            remainingChange -= 500;
+        }while (remainingChange >= 200 ) {
+            coinCounts[200]--;
+            changeCoins.push_back(200);
+            remainingChange -= 200;
+        } while (remainingChange >= 100 ) {
+            coinCounts[100] = coinCounts[100]-1;
+            changeCoins.push_back(100);
+            remainingChange -= 100;
+        }while (remainingChange >= 50) {
+            coinCounts[50] = coinCounts[50]-1;
+            changeCoins.push_back(50);
+            remainingChange -= 50;
+        }while (remainingChange >= 10 ) {
+            coinCounts[10]--;
+            changeCoins.push_back(10);
+            remainingChange -= 10;
+        }while (remainingChange >= 5 ) {
+            coinCounts[5] = coinCounts[5] -1;
+            changeCoins.push_back(5);
+            remainingChange -= 5;
+        } if (remainingChange ==0){
+            // No suitable coin found to give change
+           remainingChange =0;
+        }
+    }
+
+    return changeCoins;
+}
+
+void Coin::addCents(int cents){
+    if (cents == 1000){
+       coinCounts[1000] = coinCounts[1000]+1; 
+    }
+    if (cents == 500){
+       coinCounts[500] = coinCounts[500]+1; 
+    }
+    if (cents == 200){
+       coinCounts[200] = coinCounts[200]+1; 
+    }
+    if (cents == 100){
+       coinCounts[100] = coinCounts[100]+1; 
+    }
+    if (cents == 50){
+       coinCounts[50] = coinCounts[50]+1; 
+    }
+    if (cents == 10){
+       coinCounts[10] = coinCounts[10]+1; 
+    }
+    if (cents == 5){
+       coinCounts[5] = coinCounts[5]+1; 
+    }
+}
+
+
 
 
 
