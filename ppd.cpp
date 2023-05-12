@@ -107,7 +107,6 @@ int main(int argc, char **argv)
                 itm = itemstock.getStock(item_id);
                 std::string price_str = std::to_string(prc.dollars) + "." + prc.cents;
                 item_prc = std::stod(price_str) * 100;
-                std::cout << item_prc << std::endl;
                 std::cout << "You have selected "<< '"'<< itm->name << "-"<<itm->description <<'"'<<".This will cost you $"<< prc.dollars<<"."<<prc.cents<< std::endl;
                 std::cout << "Please hand over the money - type in the value of each note/coin in cents." << std::endl;
                 std::getline(std::cin, centz);
