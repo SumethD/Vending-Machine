@@ -1,6 +1,7 @@
 #ifndef COIN_H
 #define COIN_H
 #include "Node.h"
+#include <vector>
 
 // Coin.h defines the coin structure for managing currency in the system. 
 #define DELIM ','  // delimiter 
@@ -20,14 +21,15 @@ class Coin
 public:
     // the denomination type
     enum Denomination denom;
-    
     // the count of how many of these are in the cash register
     unsigned count;
     void loadCoin(const std::string& filename);
     void printCoins();
     void resetCoins();
-    void writeCoin(std::ofstream& coins_file) const;
-    
+    void storeCoins(const std::string& filename) const ;
+    bool newCoin(int cents);
+    std::vector<int> getChange(int change);
+    void addCents(int cents);
 };
 
 #endif // COIN_H
