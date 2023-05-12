@@ -10,7 +10,6 @@ Administrator-Only Menu:
     8.Reset Coins
     9.Abort Program
 Select your option (1-9)
-1
 
 Items Menu
 ----------
@@ -34,13 +33,9 @@ Administrator-Only Menu:
     8.Reset Coins
     9.Abort Program
 Select your option (1-9)
-4
 
 The id of the new stock will be: I0006
-Enter the Item name: choco pie
-Enter the item description: pie with chocolate
-Enter the price for the item: 3.00
-This item "choco pie-pie with chocolate" has now been added to the menu.
+Enter the Item name: Enter the item description: Enter the price for the item: This item "choco pie-pie with chocolate" has now been added to the menu.
 
 Main Menu:
     1.Display Items
@@ -54,7 +49,6 @@ Administrator-Only Menu:
     8.Reset Coins
     9.Abort Program
 Select your option (1-9)
-1
 
 Items Menu
 ----------
@@ -79,7 +73,5 @@ Administrator-Only Menu:
     8.Reset Coins
     9.Abort Program
 Select your option (1-9)
-3
 
 Data saved to file new_stock.dat
-Saved to new_stock.dat new_coins.dat

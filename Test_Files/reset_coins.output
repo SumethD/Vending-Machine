@@ -10,7 +10,6 @@ Administrator-Only Menu:
     8.Reset Coins
     9.Abort Program
 Select your option (1-9)
-6
 
 Denomination   |Count
 ------------------------
@@ -35,7 +34,6 @@ Administrator-Only Menu:
     8.Reset Coins
     9.Abort Program
 Select your option (1-9)
-8
 
 All coins have been set to 20 
 Main Menu:
@@ -50,7 +48,6 @@ Administrator-Only Menu:
     8.Reset Coins
     9.Abort Program
 Select your option (1-9)
-6
 
 Denomination   |Count
 ------------------------
@@ -75,16 +72,6 @@ Administrator-Only Menu:
     8.Reset Coins
     9.Abort Program
 Select your option (1-9)
-3
 
-TEST_3
 Data saved to file new_stock.dat
-==8745== 
-==8745== HEAP SUMMARY:
-==8745==     in use at exit: 0 bytes in 0 blocks
-==8745==   total heap usage: 80 allocs, 80 frees, 123,483 bytes allocated
-==8745== 
-==8745== All heap blocks were freed -- no leaks are possible
-==8745== 
-==8745== For lists of detected and suppressed errors, rerun with: -s
-==8745== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+Saved to new_stock.dat new_coins.dat

@@ -10,7 +10,6 @@ Administrator-Only Menu:
     8.Reset Coins
     9.Abort Program
 Select your option (1-9)
-1
 
 Items Menu
 ----------
@@ -34,7 +33,5 @@ Administrator-Only Menu:
     8.Reset Coins
     9.Abort Program
 Select your option (1-9)
-3
 
 Data saved to file new_stock.dat
-Saved to new_stock.dat new_coins.dat

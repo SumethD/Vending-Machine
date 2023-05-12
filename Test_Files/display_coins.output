@@ -10,7 +10,6 @@ Administrator-Only Menu:
     8.Reset Coins
     9.Abort Program
 Select your option (1-9)
-6
 
 Denomination   |Count
 ------------------------
@@ -35,6 +34,5 @@ Administrator-Only Menu:
     8.Reset Coins
     9.Abort Program
 Select your option (1-9)
-3
 
 Data saved to file new_stock.dat
