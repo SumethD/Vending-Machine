@@ -57,7 +57,16 @@ int main(int argc, char **argv)
     std::string new_stockfile = "new_stock.dat";
 
     coinstock.loadCoin(coinsf);
-    itemstock.loadData(filename);
+    bool succ_load= itemstock.loadData(filename);
+    while (!succ_load)
+    {
+        std::cout << "Error loading data from file " << filename << std::endl;
+        std::cout << "Please enter a new filename: ";
+        std::cin >> filename;
+        succ_load = itemstock.loadData(filename);
+        incorrect_f = true;
+    }
+    
 
     itemstock.sortByName();
     if (incorrect_f){

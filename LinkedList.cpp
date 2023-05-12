@@ -31,66 +31,106 @@ LinkedList::~LinkedList() {
     count = 0;
 }
 
-void LinkedList::loadData(const std::string& filename) {
+bool LinkedList::loadData(const std::string& filename) {
     std::ifstream file(filename);
     if (!file.is_open()) {
         std::cout << "Error opening file " << filename << std::endl;
-        return;
+        return false;
     }
 
     std::string line;
-    while (std::getline(file, line)) {
-        // Split the line into fields using '|' as the delimiter
-        std::istringstream iss(line);
-        std::vector<std::string> fields;
-        std::string field;
-        while (std::getline(iss, field, '|')) {
-            fields.push_back(field);
-        }
+bool allLinesValid = true; // initialize variable to true
 
-    //     // Create a new Node and populate it with data from the fields
-        Node* newNode = new Node();
-        newNode->data->id = fields[0];
-        newNode->data->name = fields[1];
-        newNode->data->description = fields[2];
-        newNode->data->on_hand = std::stoi(fields[4]);
-
-        double value =std::stod(fields[3]) ;
-        int dollars = std::floor(value); // get integer part
-        int cents = std::round(((value - dollars) * 100));
-
-        if (cents == 0){
-            std::stringstream ss;
-            ss << std::setw(2) << std::setfill('0') << cents;
-            newNode->data->price.cents =ss.str();
-        }
-        else{
-            newNode->data->price.cents =std::to_string(cents);  
-        }
-
-
-        newNode->data->price.dollars = dollars;
-        
-
-
-
-        //Add the new Node to the end of the list
-        if (head == nullptr) {
-            head = newNode;
-        } 
-        else {
-            Node* current = head;
-            while (current->next != nullptr) {
-                current = current->next;
-            }
-            current->next = newNode;
-
-        }
-        count++;
+while (std::getline(file, line)) {
+    // Split the line into fields using '|' as the delimiter
+    std::istringstream iss(line);
+    std::vector<std::string> fields;
+    std::string field;
+    while (std::getline(iss, field, '|')) {
+        fields.push_back(field);
     }
 
-    file.close();
+    // Check if all conditions are met
+    bool validLine = true;
+
+    // Check if ID has a length of 5 and meets the format requirements
+    if (fields[0].length() != 5 || fields[0][0] != 'I' || !std::isdigit(fields[0][1]) || !std::isdigit(fields[0][2]) || !std::isdigit(fields[0][3]) || !std::isdigit(fields[0][4])) {
+        validLine = false;
+    }
+
+    // Check if name is less than 40 characters
+    if (fields[1].length() >= 40) {
+        validLine = false;
+    }
+
+    // Check if description is less than 255 characters
+    if (fields[2].length() >= 255) {
+        validLine = false;
+    }
+
+    // Check if on-hand value is an integer
+    try {
+        std::stoi(fields[4]);
+    } catch (const std::invalid_argument&) {
+        validLine = false;
+    }
+
+    // If any condition is not met, mark the line as invalid
+    if (!validLine) {
+        allLinesValid = false;
+    } else {
+        // Check if ID already exists in the list
+        bool idExists = false;
+        Node* current = head;
+        while (current != nullptr) {
+            if (current->data->id == fields[0]) {
+                idExists = true;
+                break;
+            }
+            current = current->next;
+        }
+
+        // If ID doesn't exist, add the new node to the end of the list
+        if (!idExists) {
+            Node* newNode = new Node();
+            newNode->data->id = fields[0];
+            newNode->data->name = fields[1];
+            newNode->data->description = fields[2];
+            newNode->data->on_hand = std::stoi(fields[4]);
+
+            double value = std::stod(fields[3]);
+            int dollars = std::floor(value); // get integer part
+            int cents = std::round(((value - dollars) * 100));
+
+            if (cents == 0) {
+                std::stringstream ss;
+                ss << std::setw(2) << std::setfill('0') << cents;
+                newNode->data->price.cents = ss.str();
+            } else {
+                newNode->data->price.cents = std::to_string(cents);  
+            }
+
+            newNode->data->price.dollars = dollars;
+
+            // Add the new Node to the end of the list
+            if (head == nullptr) {
+                head = newNode;
+            } else {
+                current = head;
+                while (current->next != nullptr) {
+                    current = current->next;
+                }
+                current->next = newNode;
+            }
+            count++;
+        }
+    }
 }
+
+file.close();
+return allLinesValid;
+}
+
 
 void LinkedList::sortByName() {
     Node* current = head;

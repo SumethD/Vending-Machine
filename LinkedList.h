@@ -11,7 +11,7 @@ public:
     Node* head;
 
     // more functions to be added perhaps...
-    void loadData(const std::string& filename);
+    bool loadData(const std::string& filename);
     void sortByName();
     void remove(std::string id);
     std::string nextID();
