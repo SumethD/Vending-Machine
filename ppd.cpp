@@ -256,7 +256,6 @@ int main(int argc, char **argv)
                 std::cout <<"Here is your "<<itm->name <<" and your change of $ "<<final_total<<": "<<final_c<< std::endl;
                 if (menutype){
                     choice =mainMenu();
-                    std::getline(std::cin, choice);
                     }else{
                 choice =mainMenu();
                 }
