@@ -1,0 +1,90 @@
+Main Menu:
+    1.Display Items
+    2.Purhcase Items
+    3.Save and Exit
+Administrator-Only Menu:
+    4.Add Items
+    5.Remove Item
+    6.Display Coins
+    7.Reset Stock
+    8.Reset Coins
+    9.Abort Program
+Select your option (1-9)
+6
+
+Denomination   |Count
+------------------------
+5 cents        |   20
+10 cents       |   40
+20 cents       |    3
+50 cents       |    5
+1 dollar       |   30
+2 dollars      |   20
+5 dollars      |    4
+10 dollars     |    3
+
+Main Menu:
+    1.Display Items
+    2.Purhcase Items
+    3.Save and Exit
+Administrator-Only Menu:
+    4.Add Items
+    5.Remove Item
+    6.Display Coins
+    7.Reset Stock
+    8.Reset Coins
+    9.Abort Program
+Select your option (1-9)
+8
+
+All coins have been set to 20 
+Main Menu:
+    1.Display Items
+    2.Purhcase Items
+    3.Save and Exit
+Administrator-Only Menu:
+    4.Add Items
+    5.Remove Item
+    6.Display Coins
+    7.Reset Stock
+    8.Reset Coins
+    9.Abort Program
+Select your option (1-9)
+6
+
+Denomination   |Count
+------------------------
+5 cents        |   20
+10 cents       |   20
+20 cents       |   20
+50 cents       |   20
+1 dollar       |   20
+2 dollars      |   20
+5 dollars      |   20
+10 dollars     |   20
+
+Main Menu:
+    1.Display Items
+    2.Purhcase Items
+    3.Save and Exit
+Administrator-Only Menu:
+    4.Add Items
+    5.Remove Item
+    6.Display Coins
+    7.Reset Stock
+    8.Reset Coins
+    9.Abort Program
+Select your option (1-9)
+3
+
+TEST_3
+Data saved to file new_stock.dat
+==8745== 
+==8745== HEAP SUMMARY:
+==8745==     in use at exit: 0 bytes in 0 blocks
+==8745==   total heap usage: 80 allocs, 80 frees, 123,483 bytes allocated
+==8745== 
+==8745== All heap blocks were freed -- no leaks are possible
+==8745== 
+==8745== For lists of detected and suppressed errors, rerun with: -s
+==8745== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
